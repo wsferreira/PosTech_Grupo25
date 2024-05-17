@@ -2,7 +2,7 @@
 
 namespace PosTech.Contatos.API.Interfaces
 {
-    public interface IRegiaoRepository : IRepository<Contato>
+    public interface IRegiaoRepository : IRepository<Regiao>
     {
     }
 }

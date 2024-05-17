@@ -1,4 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using PosTech.Contatos.API.Interfaces;
+using PosTech.Contatos.API.Repository;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .Build();
 
 // Add services to the container.
 
@@ -6,6 +14,15 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(configuration.GetConnectionString("ConnectionStringSql"));
+    options.UseLazyLoadingProxies();
+}, ServiceLifetime.Scoped);
+
+builder.Services.AddScoped<IRegiaoRepository, RegiaoRepository>();
+builder.Services.AddScoped<IContatoRepository, ContatoRepository>();
 
 var app = builder.Build();
 
