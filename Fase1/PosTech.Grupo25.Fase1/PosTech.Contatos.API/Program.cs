@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PosTech.Contatos.API.Interfaces;
 using PosTech.Contatos.API.Repository;
+using PosTech.Contatos.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseLazyLoadingProxies();
 }, ServiceLifetime.Scoped);
 
+builder.Services.AddScoped<IContatoService, ContatoService>();
 builder.Services.AddScoped<IRegiaoRepository, RegiaoRepository>();
 builder.Services.AddScoped<IContatoRepository, ContatoRepository>();
 

@@ -12,7 +12,7 @@ using PosTech.Contatos.API.Repository;
 namespace PosTech.Contatos.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240517000410_Primeira-Migracao")]
+    [Migration("20240517005857_Primeira-Migracao")]
     partial class PrimeiraMigracao
     {
         /// <inheritdoc />
