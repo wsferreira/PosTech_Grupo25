@@ -1,7 +1,6 @@
 ﻿using Moq;
 using PosTech.Contatos.API.Interfaces;
 using PosTech.Contatos.API.Models;
-using PosTech.Contatos.API.Repository;
 using PosTech.Contatos.API.Services;
 using System;
 using System.Collections.Generic;
@@ -142,11 +141,7 @@ namespace PosTech.Contatos.API.Tests.Services
 
             // Act & Assert
             var exception = Record.Exception(() => contatoService.Cadastrar(contatoParaCadastrar));
-/*
-            var act = () => mockContatoService.Object.Cadastrar(contatoParaCadastrar);
 
-            DomainException exception = Assert.Throws<DomainException>(act);
-         */
             Assert.Equal("DDD não encontrado.", exception.Message);
 
          
