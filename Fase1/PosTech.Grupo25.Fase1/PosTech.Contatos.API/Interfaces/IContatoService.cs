@@ -7,8 +7,8 @@ namespace PosTech.Contatos.API.Interfaces
         IList<Contato> ObterTodos();        
         IList<Contato> ObterContatosPorRegiao(int regiaoDDD);
         Contato ObterPorId(int id);
-        string Cadastrar(Contato contato);
-        string Alterar(Contato contato);
-        string Deletar(int id);
+        void Cadastrar(Contato contato);
+        void Alterar(Contato contato);
+        void Deletar(int id);
     }
 }

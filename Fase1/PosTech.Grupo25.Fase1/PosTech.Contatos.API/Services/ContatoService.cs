@@ -14,49 +14,28 @@ namespace PosTech.Contatos.API.Services
             _regiaoRepository = regiaoRepository;
         }
 
-        public string Alterar(Contato contato)
+        public void Alterar(Contato contato)
         {
-            var result = VerificaContatoExiste(contato.Id);
+            VerificaContatoExiste(contato.Id);
 
-            if(!string.IsNullOrEmpty(result))
-            {
-                return result;
-            }
-
-            result = VerificaRegiaoExiste(contato.RegiaoId);
-
-            if (!string.IsNullOrEmpty(result))
-            {
-                return result;
-            }
-
+            VerificaRegiaoExiste(contato.RegiaoId);
 
             _contatoRepository.Alterar(contato);
-            return string.Empty;
         }
 
-        public string Cadastrar(Contato contato)
+        public void Cadastrar(Contato contato)
         {
-            var result = VerificaRegiaoExiste(contato.RegiaoId);
+            VerificaRegiaoExiste(contato.RegiaoId);
 
-            if (!string.IsNullOrEmpty(result))
-            {
-                return result;
-            }
             _contatoRepository.Cadastrar(contato);
-            return string.Empty;
+           
         }
 
-        public string Deletar(int id)
+        public void Deletar(int id)
         {
-            var result = VerificaContatoExiste(id);
+            VerificaContatoExiste(id);
 
-            if (!string.IsNullOrEmpty(result))
-            {
-                return result;
-            }
             _contatoRepository.Deletar(id);
-            return string.Empty;
         }
 
         public IList<Contato> ObterContatosPorRegiao(int regiaoDDD)
@@ -74,24 +53,22 @@ namespace PosTech.Contatos.API.Services
             return _contatoRepository.ObterTodos();
         }
 
-        private string VerificaContatoExiste(int id)
+        private void VerificaContatoExiste(int id)
         {
             var cont = _contatoRepository.ObterPorId(id);
             if (cont == null)
             {
-                return "Contato não encontrado.";
+                throw new DomainException("Contato não encontrado.");
             }
-            return string.Empty;
         }
 
-        private string VerificaRegiaoExiste(int id)
+        private void VerificaRegiaoExiste(int id)
         {
             var cont = _regiaoRepository.ObterPorId(id);
             if (cont == null)
             {
-                return "DDD não encontrado.";
+                throw new DomainException("DDD não encontrado.");
             }
-            return string.Empty;
         }
     }
 }

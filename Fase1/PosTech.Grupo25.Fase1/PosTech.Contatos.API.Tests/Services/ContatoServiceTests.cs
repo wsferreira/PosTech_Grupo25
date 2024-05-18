@@ -1,6 +1,8 @@
 ﻿using Moq;
 using PosTech.Contatos.API.Interfaces;
 using PosTech.Contatos.API.Models;
+using PosTech.Contatos.API.Repository;
+using PosTech.Contatos.API.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -121,6 +123,33 @@ namespace PosTech.Contatos.API.Tests.Services
             // Act & Assert
             var exception = Record.Exception(() => mockContatoService.Object.Cadastrar(contatoParaCadastrar));
             Assert.Null(exception);
+        }
+
+        [Theory(DisplayName = "Validando se o cadastro valida DDD")]
+        [Trait("Categoria", "Validando Contato Service")]
+        [InlineData(0)]
+        [InlineData(-1)]
+        public void Cadastrar_DeveValidarDDD(int regiaoId)
+        {
+            // Arrange
+            var contatoRepository = new Mock<IContatoRepository>(); 
+            var regiaoRepository = new Mock<IRegiaoRepository>();
+            var contatoService = new ContatoService(contatoRepository.Object, regiaoRepository.Object);
+
+            var contatoParaCadastrar = new Contato { Id = 0, Nome = "João", Email = "joao@email.com", Telefone = "1234-5678", RegiaoId = regiaoId };
+
+
+
+            // Act & Assert
+            var exception = Record.Exception(() => contatoService.Cadastrar(contatoParaCadastrar));
+/*
+            var act = () => mockContatoService.Object.Cadastrar(contatoParaCadastrar);
+
+            DomainException exception = Assert.Throws<DomainException>(act);
+         */
+            Assert.Equal("DDD não encontrado.", exception.Message);
+
+         
         }
 
         [Fact(DisplayName = "Validando se a alteração não retorna exceções")]
