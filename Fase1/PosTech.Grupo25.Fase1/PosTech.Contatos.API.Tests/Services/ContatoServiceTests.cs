@@ -13,7 +13,7 @@ namespace PosTech.Contatos.API.Tests.Services
     public class ContatoServiceTests
     {
         [Fact(DisplayName = "Validando se a lista de contatos é retornada com sucesso")]
-        [Trait("Categoria", "Validando Contato Service")]
+        [Trait("Categoria", "Validando Contato")]
         public void ObterTodos_DeveRetornarListaDeContatos()
         {
             // Arrange
@@ -38,7 +38,7 @@ namespace PosTech.Contatos.API.Tests.Services
         }
 
         [Fact(DisplayName = "Validando se a lista de contatos por região é retornada com apenas mesmo DDD")]
-        [Trait("Categoria", "Validando Contato Service")]
+        [Trait("Categoria", "Validando Contato")]
         public void ObterContatosPorRegiao_DeveRetornarListaDeContatosMesmoDDD()
         {
             // Arrange
@@ -68,7 +68,7 @@ namespace PosTech.Contatos.API.Tests.Services
 
 
         [Fact(DisplayName = "Validando o contato por Id retorna o mesmo registro")]
-        [Trait("Categoria", "Validando Contato Service")]
+        [Trait("Categoria", "Validando Contato")]
         public void ObterPorId_DeveRetornarContatoExistente()
         {
             // Arrange
@@ -90,7 +90,7 @@ namespace PosTech.Contatos.API.Tests.Services
         }
 
         [Fact(DisplayName = "Validando o contato por Id retorna nenhum registro")]
-        [Trait("Categoria", "Validando Contato Service")]
+        [Trait("Categoria", "Validando Contato")]
         public void ObterPorId_DeveRetornarNull()
         {
             // Arrange
@@ -112,7 +112,7 @@ namespace PosTech.Contatos.API.Tests.Services
 
 
         [Fact(DisplayName = "Validando se o cadastro não retorna exceções")]
-        [Trait("Categoria", "Validando Contato Service")]
+        [Trait("Categoria", "Validando Contato")]
         public void Cadastrar_DeveExecutarSemExcecoes()
         {
             // Arrange
@@ -125,7 +125,7 @@ namespace PosTech.Contatos.API.Tests.Services
         }
 
         [Theory(DisplayName = "Validando se o cadastro valida DDD")]
-        [Trait("Categoria", "Validando Contato Service")]
+        [Trait("Categoria", "Validando Contato")]
         [InlineData(0)]
         [InlineData(-1)]
         public void Cadastrar_DeveValidarDDD(int regiaoId)
@@ -148,7 +148,7 @@ namespace PosTech.Contatos.API.Tests.Services
         }
 
         [Fact(DisplayName = "Validando se a alteração não retorna exceções")]
-        [Trait("Categoria", "Validando Contato Service")]
+        [Trait("Categoria", "Validando Contato")]
         public void Alterar_DeveExecutarSemExcecoes()
         {
             // Arrange
@@ -161,7 +161,7 @@ namespace PosTech.Contatos.API.Tests.Services
         }
 
         [Fact(DisplayName = "Validando se a exclusão não retorna exceções")]
-        [Trait("Categoria", "Validando Contato Service")]
+        [Trait("Categoria", "Validando Contato")]
         public void Deletar_DeveExecutarSemExcecoes()
         {
             // Arrange
