@@ -21,7 +21,12 @@ builder.Services.AddSwaggerGen();
 // ADD Antonio José Lima Jr -> 18/05/2024
 // adicionado para resolver o problema de circle de referencias 
 
-builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+//builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {

@@ -66,8 +66,7 @@ namespace PosTech.Contatos.API.Controllers
         {
             try
             {
-                var CadastrarContato = _contatoService.Cadastrar(contato)
-                Created("", CadastrarContato);
+                _contatoService.Cadastrar(contato);
                 return Ok();
             }
             catch (Exception ex)
@@ -82,8 +81,8 @@ namespace PosTech.Contatos.API.Controllers
         {
             try
             {
-                var AlterarCadastro = _contatoService.Alterar(contato);
-                return Created("", AlterarCadastro);
+                _contatoService.Alterar(contato);
+                return Ok();// Created("", AlterarCadastro);
             }
             catch (Exception ex)
             {
