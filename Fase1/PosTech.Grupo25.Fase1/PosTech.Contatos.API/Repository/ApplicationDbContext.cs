@@ -36,7 +36,8 @@ namespace PosTech.Contatos.API.Repository
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(_connectionString);
-                optionsBuilder.UseLazyLoadingProxies();
+                optionsBuilder.EnableSensitiveDataLogging();
+                //optionsBuilder.UseLazyLoadingProxies();
             }
         }
 

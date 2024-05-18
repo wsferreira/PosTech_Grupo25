@@ -31,7 +31,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(configuration.GetConnectionString("ConnectionStringSql"));
-    options.UseLazyLoadingProxies();
+    //options.UseLazyLoadingProxies();
     options.EnableSensitiveDataLogging(true); // ADD Antonio José Lima Jr -> 18/05/2024
 }, ServiceLifetime.Scoped);
 

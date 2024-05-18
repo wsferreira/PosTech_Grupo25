@@ -36,7 +36,7 @@ namespace PosTech.Contatos.API.Repository
         }
 
         public T ObterPorId(int id)
-            => _dbSet.FirstOrDefault(entity => entity.Id == id);
+            => _dbSet.AsNoTracking().FirstOrDefault(entity => entity.Id == id);
 
 
         public IList<T> ObterTodos()

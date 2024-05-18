@@ -62,11 +62,18 @@ namespace PosTech.Contatos.API.Controllers
 
         [HttpPost("Cadastrar")]
        [AllowAnonymous]
-        public IActionResult Cadastrar(Contato contato)
+        public IActionResult Cadastrar(InputContatoCadastrar contato)
         {
             try
             {
-                _contatoService.Cadastrar(contato);
+                Contato cont = new Contato() {
+                    Id = 0,
+                    Nome = contato.Nome   , 
+                    Email = contato.Email ,
+                    Telefone = contato.Telefone ,
+                    RegiaoId = contato.RegiaoId 
+                };
+                _contatoService.Cadastrar(cont);
                 return Ok();
             }
             catch (Exception ex)
@@ -77,11 +84,20 @@ namespace PosTech.Contatos.API.Controllers
 
         [HttpPut("Alterar")]
         [AllowAnonymous]
-        public IActionResult Alterar(Contato contato)
+        public IActionResult Alterar(InputContatoAlterar contato)
         {
             try
             {
-                _contatoService.Alterar(contato);
+                Contato cont = new Contato()
+                {
+                    Id = contato.Id,
+                    Nome = contato.Nome,
+                    Email = contato.Email,
+                    Telefone = contato.Telefone,
+                    RegiaoId = contato.RegiaoId
+                };
+
+                _contatoService.Alterar(cont);
                 return Ok();// Created("", AlterarCadastro);
             }
             catch (Exception ex)

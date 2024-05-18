@@ -16,9 +16,14 @@ namespace PosTech.Contatos.API.Services
 
         public void Alterar(Contato contato)
         {
-            VerificaContatoExiste(contato.Id);
+            Contato cont = VerificaContatoExiste(contato.Id);
             VerificaRegiaoExiste(contato.RegiaoId);
-            _contatoRepository.Alterar(contato);
+            cont.Nome = contato.Nome;
+            cont.Email = contato.Email;
+            cont.Telefone = contato.Telefone;
+            cont.RegiaoId = contato.RegiaoId;
+
+            _contatoRepository.Alterar(cont);
         }
 
         public void Cadastrar(Contato contato)
@@ -46,13 +51,14 @@ namespace PosTech.Contatos.API.Services
             return _contatoRepository.ObterTodos();
         }
 
-        private void VerificaContatoExiste(int id)
+        private Contato VerificaContatoExiste(int id)
         {
             var cont = _contatoRepository.ObterPorId(id);
             if (cont == null)
             {
                 throw new DomainException("Contato não encontrado.");
             }
+            return cont;
         }
 
         private void VerificaRegiaoExiste(int id)

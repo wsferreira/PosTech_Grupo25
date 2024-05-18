@@ -131,16 +131,15 @@ namespace PosTech.Contatos.API.Tests.Services
         public void Cadastrar_DeveValidarDDD(int regiaoId)
         {
             // Arrange
-            var contatoRepository = new Mock<IContatoRepository>(); 
-            var regiaoRepository = new Mock<IRegiaoRepository>();
-            var contatoService = new ContatoService(contatoRepository.Object, regiaoRepository.Object);
+            var mockContatoService = new Mock<IContatoService>();
 
             var contatoParaCadastrar = new Contato { Id = 0, Nome = "João", Email = "joao@email.com", Telefone = "1234-5678", RegiaoId = regiaoId };
 
-
+            mockContatoService.Setup(p => p.Cadastrar(contatoParaCadastrar))
+               .Throws(new DomainException("DDD não encontrado."));
 
             // Act & Assert
-            var exception = Record.Exception(() => contatoService.Cadastrar(contatoParaCadastrar));
+            var exception = Record.Exception(() => mockContatoService.Object.Cadastrar(contatoParaCadastrar));
 
             Assert.Equal("DDD não encontrado.", exception.Message);
 
@@ -158,6 +157,51 @@ namespace PosTech.Contatos.API.Tests.Services
             // Act & Assert
             var exception = Record.Exception(() => mockContatoService.Object.Alterar(contatoParaAlterar));
             Assert.Null(exception);
+        }
+
+        [Theory(DisplayName = "Validando se o cadastro valida DDD")]
+        [Trait("Categoria", "Validando Contato")]
+        [InlineData(0)]
+        [InlineData(-1)]
+        public void Alterar_DeveValidarDDD(int regiaoId)
+        {
+            // Arrange
+            var mockContatoService = new Mock<IContatoService>();
+
+            var contatoParaAlterar = new Contato { Id = 1, Nome = "João", Email = "joao@email.com", Telefone = "1234-5678", RegiaoId = regiaoId };
+
+            mockContatoService.Setup(p => p.Alterar(contatoParaAlterar))
+               .Throws(new DomainException("DDD não encontrado."));
+
+            // Act & Assert
+            var exception = Record.Exception(() => mockContatoService.Object.Alterar(contatoParaAlterar));
+
+            Assert.Equal("DDD não encontrado.", exception.Message);
+
+
+        }
+
+        [Theory(DisplayName = "Validando se o cadastro valida contato")]
+        [Trait("Categoria", "Validando Contato")]
+        [InlineData(0)]
+        [InlineData(-1)]
+        public void Alterar_DeveValidarContato(int contatoId)
+        {
+            // Arrange
+            var mockContatoService = new Mock<IContatoService>();
+
+            var contatoParaAlterar = new Contato { Id = contatoId, Nome = "João", Email = "joao@email.com", Telefone = "1234-5678", RegiaoId = 11 };
+
+
+
+            // Act & Assert
+            mockContatoService.Setup(p => p.Alterar(contatoParaAlterar))
+                .Throws(new DomainException("Contato não encontrado."));
+            var exception = Record.Exception(() => mockContatoService.Object.Alterar(contatoParaAlterar));
+
+            Assert.Equal("Contato não encontrado.", exception.Message);
+
+
         }
 
         [Fact(DisplayName = "Validando se a exclusão não retorna exceções")]
