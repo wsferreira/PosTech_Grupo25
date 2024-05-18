@@ -17,27 +17,20 @@ namespace PosTech.Contatos.API.Services
         public void Alterar(Contato contato)
         {
             VerificaContatoExiste(contato.Id);
-
             VerificaRegiaoExiste(contato.RegiaoId);
-
             _contatoRepository.Alterar(contato);
         }
 
         public void Cadastrar(Contato contato)
         {
             VerificaRegiaoExiste(contato.RegiaoId);
-
             _contatoRepository.Cadastrar(contato);
-           
         }
-
         public void Deletar(int id)
         {
             VerificaContatoExiste(id);
-
             _contatoRepository.Deletar(id);
         }
-
         public IList<Contato> ObterContatosPorRegiao(int regiaoDDD)
         {
             return _contatoRepository.ObterContatosPorRegiao(regiaoDDD);

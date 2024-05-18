@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using PosTech.Contatos.API.Interfaces;
 using PosTech.Contatos.API.Repository;
 using PosTech.Contatos.API.Services;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,10 +17,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+// ADD Antonio José Lima Jr -> 18/05/2024
+// adicionado para resolver o problema de circle de referencias 
+
+builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(configuration.GetConnectionString("ConnectionStringSql"));
     options.UseLazyLoadingProxies();
+    options.EnableSensitiveDataLogging(true); // ADD Antonio José Lima Jr -> 18/05/2024
 }, ServiceLifetime.Scoped);
 
 builder.Services.AddScoped<IContatoService, ContatoService>();
