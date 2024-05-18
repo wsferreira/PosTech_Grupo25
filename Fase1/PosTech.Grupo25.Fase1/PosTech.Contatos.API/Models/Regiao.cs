@@ -2,8 +2,7 @@
 {
     public class Regiao : EntityBase
     {
-        public required string Descricao { get; set; }
-        public required string Estado { get; set; }
-        public virtual ICollection<Contato> Contatos { get; set; }
+        public string Descricao { get; set; }
+        public string Estado { get; set; }
     }
 }
