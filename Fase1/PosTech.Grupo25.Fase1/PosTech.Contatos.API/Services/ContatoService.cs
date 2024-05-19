@@ -16,6 +16,7 @@ namespace PosTech.Contatos.API.Services
 
         public void Alterar(Contato contato)
         {
+            contato.ValidarEntidade();
             Contato cont = VerificaContatoExiste(contato.Id);
             VerificaRegiaoExiste(contato.RegiaoId);
             cont.Nome = contato.Nome;
@@ -28,6 +29,7 @@ namespace PosTech.Contatos.API.Services
 
         public void Cadastrar(Contato contato)
         {
+            contato.ValidarEntidade();
             VerificaRegiaoExiste(contato.RegiaoId);
             _contatoRepository.Cadastrar(contato);
         }
