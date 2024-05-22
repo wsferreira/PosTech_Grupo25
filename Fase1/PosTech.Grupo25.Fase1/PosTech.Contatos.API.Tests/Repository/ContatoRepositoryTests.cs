@@ -60,12 +60,24 @@ namespace PosTech.Contatos.API.Tests.Repository
             // Arrange
             var regiaoDDD = 11; // Exemplo de DDD
 
+            List<Contato> lista = new List<Contato>
+            {
+                new Contato { Id = 7, Nome = "João", Email = "joao@email.com", Telefone = "1234-5678", RegiaoId = 11 },
+                new Contato { Id = 8, Nome = "Maria", Email = "maria@email.com", Telefone = "9875-5678", RegiaoId = 22 },
+                new Contato { Id = 9, Nome = "Carlos", Email = "carlos@email.com", Telefone = "9887-5678", RegiaoId = 21 },
+                new Contato { Id = 10, Nome = "José", Email = "jose@email.com", Telefone = "9887-5678", RegiaoId = 11 }
+
+            };
+            _context.Contato.AddRange(lista);
+            _context.SaveChanges();
+
             // Act
             var contatos = _contatoRepository.ObterContatosPorRegiao(regiaoDDD);
+            var todosContatos = _contatoRepository.ObterTodos();
 
             // Assert
             Assert.NotNull(contatos);
-            Assert.Equal(contatos.Count, contatos.Where(c => c.RegiaoId == regiaoDDD).ToList().Count); // Verifica se a lista tem todos os contatos com mesmo DDD
+            Assert.Equal(contatos.Count, todosContatos.Where(c => c.RegiaoId == regiaoDDD).ToList().Count); // Verifica se a lista tem todos os contatos com mesmo DDD
 
         }
 
@@ -129,19 +141,12 @@ namespace PosTech.Contatos.API.Tests.Repository
         {
 
             // Arrange         
-            /*var contatoParaAlterar = new Contato { Id = 1, Nome = "Denise", Email = "denise@email.com", Telefone = "1234-5678", RegiaoId = 11 };
-                
-            contatoParaAlterar.Nome = "Denise 2";           
+            var contatoParaAlterar = new Contato { Id = 2, Nome = "Denise", Email = "denise@email.com", Telefone = "1234-5678", RegiaoId = 11 };
+                     
 
             // Act & Assert
-            var exception = Record.Exception(() => _contatoRepository.Alterar(contatoParaAlterar));*/
+            var exception = Record.Exception(() => _contatoRepository.Alterar(contatoParaAlterar));
 
-            // Arrange
-            var mockContatoRepository = new Mock<IContatoRepository>();
-            var contatoParaAlterar = new Contato { Id = 1, Nome = "João", Email = "joao@email.com", Telefone = "1234-5678", RegiaoId = 11 };
-
-            // Act & Assert
-            var exception = Record.Exception(() => mockContatoRepository.Object.Alterar(contatoParaAlterar));
 
             Assert.Null(exception);
         }
