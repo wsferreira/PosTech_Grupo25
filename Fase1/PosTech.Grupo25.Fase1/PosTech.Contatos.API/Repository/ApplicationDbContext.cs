@@ -18,9 +18,9 @@ namespace PosTech.Contatos.API.Repository
                       
 
         }
-        //public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        //{
-        //}
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
+        }
 
 
         public ApplicationDbContext(string connectionString)
