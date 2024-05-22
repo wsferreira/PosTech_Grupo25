@@ -38,7 +38,7 @@ namespace PosTech.Contatos.API.Services
             VerificaContatoExiste(id);
             _contatoRepository.Deletar(id);
         }
-        public IList<Contato> ObterContatosPorRegiao(int regiaoDDD)
+        public IEnumerable<Contato> ObterContatosPorRegiao(int regiaoDDD)
         {
             return _contatoRepository.ObterContatosPorRegiao(regiaoDDD);
         }
@@ -48,7 +48,7 @@ namespace PosTech.Contatos.API.Services
             return _contatoRepository.ObterPorId(id);
         }
 
-        public IList<Contato> ObterTodos()
+        public IEnumerable<Contato> ObterTodos()
         {
             return _contatoRepository.ObterTodos();
         }
@@ -63,7 +63,7 @@ namespace PosTech.Contatos.API.Services
             return cont;
         }
 
-        private void VerificaRegiaoExiste(int id)
+        protected void VerificaRegiaoExiste(int id)
         {
             var cont = _regiaoRepository.ObterPorId(id);
             if (cont == null)

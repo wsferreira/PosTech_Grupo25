@@ -18,7 +18,7 @@ namespace PosTech.Contatos.API.Services
             return _regiaoRepository.ObterPorId(id);
         }
 
-        public IList<Regiao> ObterTodos()
+        public IEnumerable<Regiao> ObterTodos()
         {
             return _regiaoRepository.ObterTodos();
         }

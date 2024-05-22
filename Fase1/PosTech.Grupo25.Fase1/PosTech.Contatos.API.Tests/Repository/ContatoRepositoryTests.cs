@@ -1,6 +1,9 @@
-﻿using Moq;
+﻿using Microsoft.EntityFrameworkCore;
+using Moq;
 using PosTech.Contatos.API.Interfaces;
 using PosTech.Contatos.API.Models;
+using PosTech.Contatos.API.Repository;
+using PosTech.Contatos.API.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,12 +28,16 @@ namespace PosTech.Contatos.API.Tests.Repository
 
             };
 
-            var mockContatoRepository = new Mock<IContatoRepository>();
-            mockContatoRepository.Setup(repo => repo.ObterTodos())
+            var mockContextDB = new Mock<ApplicationDbContext>();
+            var mockContatoDB = new Mock<DbSet<Contato>>();
+            mockContatoDB.Setup(db => db)
                 .Returns(lista);
+            mockContextDB.Setup(ctx => ctx.Contato)
+                .Returns(mockContatoDB.Object);
+            ContatoRepository contatoRepository = new ContatoRepository(mockContextDB.Object);
 
             // Act
-            var contatos = mockContatoRepository.Object.ObterTodos();
+            var contatos = contatoRepository.ObterTodos();
 
             // Assert
             Assert.NotNull(contatos);

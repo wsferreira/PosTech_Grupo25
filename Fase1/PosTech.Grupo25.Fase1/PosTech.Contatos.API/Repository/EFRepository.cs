@@ -39,7 +39,7 @@ namespace PosTech.Contatos.API.Repository
             => _dbSet.AsNoTracking().FirstOrDefault(entity => entity.Id == id);
 
 
-        public IList<T> ObterTodos()
-            => _dbSet.ToList();
+        public IEnumerable<T> ObterTodos()
+            => _dbSet;
     }
 }

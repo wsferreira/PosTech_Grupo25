@@ -1,8 +1,10 @@
 ﻿using Moq;
 using PosTech.Contatos.API.Interfaces;
 using PosTech.Contatos.API.Models;
+using PosTech.Contatos.API.Repository;
 using PosTech.Contatos.API.Services;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,15 +27,20 @@ namespace PosTech.Contatos.API.Tests.Services
                
             };
 
-            var mockContatoService = new Mock<IContatoService>();
-            mockContatoService.Setup(service => service.ObterTodos())
-                .Returns(lista);
-
+            var mockContatoRepository = new Mock<IContatoRepository>();
+            var mockRegiaoRepository = new Mock<IRegiaoRepository>();
+            mockContatoRepository.Setup(repository => repository.ObterTodos())
+            .Returns(lista);
+            ContatoService contatoService = new ContatoService(mockContatoRepository.Object, mockRegiaoRepository.Object);
+            
             // Act
-            var contatos = mockContatoService.Object.ObterTodos();
+            var contatos = contatoService.ObterTodos();
 
             // Assert
             Assert.NotNull(contatos);
+            Assert.Equal(3, contatos.Count());
+            Assert.Equal("maria@email.com", contatos.ToList()[1].Email);
+
             // Adicione mais verificações conforme necessário
         }
 
@@ -42,7 +49,6 @@ namespace PosTech.Contatos.API.Tests.Services
         public void ObterContatosPorRegiao_DeveRetornarListaDeContatosMesmoDDD()
         {
             // Arrange
-            var mockContatoService = new Mock<IContatoService>();
             var regiaoDDD = 11; // Exemplo de DDD
 
             List<Contato> lista = new List<Contato>
@@ -54,15 +60,18 @@ namespace PosTech.Contatos.API.Tests.Services
             };
 
             // Configura o comportamento do mock para retornar uma lista fictícia de contatos
-            mockContatoService.Setup(service => service.ObterContatosPorRegiao(regiaoDDD))
-                .Returns(lista);
+            var mockContatoRepository = new Mock<IContatoRepository>();
+            var mockRegiaoRepository = new Mock<IRegiaoRepository>();
+            mockContatoRepository.Setup(repository => repository.ObterContatosPorRegiao(regiaoDDD))
+            .Returns(lista);
+            ContatoService contatoService = new ContatoService(mockContatoRepository.Object, mockRegiaoRepository.Object);
 
             // Act
-            var contatos = mockContatoService.Object.ObterContatosPorRegiao(regiaoDDD);
+            var contatos = contatoService.ObterContatosPorRegiao(regiaoDDD);
 
             // Assert
             Assert.NotNull(contatos);
-            Assert.Equal(contatos.Count, contatos.Where(c => c.RegiaoId == regiaoDDD).ToList().Count); // Verifica se a lista tem todos os contatos com mesmo DDD
+            Assert.Equal(contatos.Count(), contatos.Where(c => c.RegiaoId == regiaoDDD).ToList().Count); // Verifica se a lista tem todos os contatos com mesmo DDD
                                             
         }
 
@@ -72,16 +81,18 @@ namespace PosTech.Contatos.API.Tests.Services
         public void ObterPorId_DeveRetornarContatoExistente()
         {
             // Arrange
-            var mockContatoService = new Mock<IContatoService>();
+            var mockContatoRepository = new Mock<IContatoRepository>();
+            var mockRegiaoRepository = new Mock<IRegiaoRepository>();
             var contatoId = 1;
             var contatoEsperado = new Contato { Id = 1, Nome = "João", Email = "joao@email.com", Telefone = "1234-5678", RegiaoId = 11 };
 
             // Configura o comportamento do mock para retornar o contato esperado
-            mockContatoService.Setup(service => service.ObterPorId(contatoId))
+            mockContatoRepository.Setup(repository => repository.ObterPorId(contatoId))
                 .Returns(contatoEsperado);
+            ContatoService contatoService = new ContatoService(mockContatoRepository.Object, mockRegiaoRepository.Object);
 
             // Act
-            var contato = mockContatoService.Object.ObterPorId(contatoId);
+            var contato = contatoService.ObterPorId(contatoId);
 
             // Assert
             Assert.NotNull(contato);
@@ -94,17 +105,20 @@ namespace PosTech.Contatos.API.Tests.Services
         public void ObterPorId_DeveRetornarNull()
         {
             // Arrange
-            var mockContatoService = new Mock<IContatoService>();
+            var mockContatoRepository = new Mock<IContatoRepository>();
+            var mockRegiaoRepository = new Mock<IRegiaoRepository>();
+            ContatoService contatoService = new ContatoService(mockContatoRepository.Object, mockRegiaoRepository.Object);
+
             var contatoId = 0;
             var contatoEsperado = new Contato { Id = 1, Nome = "João", Email = "joao@email.com", Telefone = "1234-5678", RegiaoId = 11 };
             contatoEsperado = null;
 
-            // Configura o comportamento do mock para retornar o contato esperado
-            mockContatoService.Setup(service => service.ObterPorId(contatoId))
-                .Returns(contatoEsperado);
+            // Configura o comportamento do mock para retornar o contato esperado+
+            mockContatoRepository.Setup(repository => repository.ObterPorId(contatoId))
+               .Returns(contatoEsperado);
 
             // Act
-            var contato = mockContatoService.Object.ObterPorId(contatoId);
+            var contato = contatoService.ObterPorId(contatoId);
 
             // Assert
             Assert.Null(contato);
@@ -116,11 +130,20 @@ namespace PosTech.Contatos.API.Tests.Services
         public void Cadastrar_DeveExecutarSemExcecoes()
         {
             // Arrange
-            var mockContatoService = new Mock<IContatoService>();
             var contatoParaCadastrar = new Contato { Id = 1, Nome = "João", Email = "joao@email.com", Telefone = "1234-5678", RegiaoId = 11 };
+            var regiaoDDD = 11;
+            Regiao regiaoParaCasdatro = new Regiao { Id = 11, Descricao = "teste", Estado = "São Paulo" };
+            var mockContatoRepository = new Mock<IContatoRepository>();
+            var mockRegiaoRepository = new Mock<IRegiaoRepository>();
+
+            mockContatoRepository.Setup(repository => repository.Cadastrar(contatoParaCadastrar));
+            mockRegiaoRepository.Setup(repository => repository.ObterPorId(regiaoDDD))
+                .Returns(regiaoParaCasdatro);
+              
+            ContatoService contatoService = new ContatoService(mockContatoRepository.Object, mockRegiaoRepository.Object);          
 
             // Act & Assert
-            var exception = Record.Exception(() => mockContatoService.Object.Cadastrar(contatoParaCadastrar));
+            var exception = Record.Exception(() => contatoService.Cadastrar(contatoParaCadastrar));
             Assert.Null(exception);
         }
 
@@ -131,15 +154,17 @@ namespace PosTech.Contatos.API.Tests.Services
         public void Cadastrar_DeveValidarDDD(int regiaoId)
         {
             // Arrange
-            var mockContatoService = new Mock<IContatoService>();
+            var mockContatoRepository = new Mock<IContatoRepository>();
+            var mockRegiaoRepository = new Mock<IRegiaoRepository>();
+            ContatoService contatoService = new ContatoService(mockContatoRepository.Object, mockRegiaoRepository.Object);
 
             var contatoParaCadastrar = new Contato { Id = 0, Nome = "João", Email = "joao@email.com", Telefone = "1234-5678", RegiaoId = regiaoId };
 
-            mockContatoService.Setup(p => p.Cadastrar(contatoParaCadastrar))
+            mockContatoRepository.Setup(repository => repository.Cadastrar(contatoParaCadastrar))
                .Throws(new DomainException("DDD não encontrado."));
 
             // Act & Assert
-            var exception = Record.Exception(() => mockContatoService.Object.Cadastrar(contatoParaCadastrar));
+            var exception = Record.Exception(() => contatoService.Cadastrar(contatoParaCadastrar));
 
             Assert.Equal("DDD não encontrado.", exception.Message);
 
@@ -151,11 +176,14 @@ namespace PosTech.Contatos.API.Tests.Services
         public void Alterar_DeveExecutarSemExcecoes()
         {
             // Arrange
-            var mockContatoService = new Mock<IContatoService>();
+            var mockContatoRepository = new Mock<IContatoRepository>();
+            var mockRegiaoRepository = new Mock<IRegiaoRepository>();
+            ContatoService contatoService = new ContatoService(mockContatoRepository.Object, mockRegiaoRepository.Object);
+
             var contatoParaAlterar = new Contato { Id = 1, Nome = "João", Email = "joao@email.com", Telefone = "1234-5678", RegiaoId = 11 };
 
             // Act & Assert
-            var exception = Record.Exception(() => mockContatoService.Object.Alterar(contatoParaAlterar));
+            var exception = Record.Exception(() => mockContatoRepository.Object.Alterar(contatoParaAlterar));
             Assert.Null(exception);
         }
 

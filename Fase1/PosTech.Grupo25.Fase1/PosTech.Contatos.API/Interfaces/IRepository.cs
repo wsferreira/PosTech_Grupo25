@@ -4,7 +4,7 @@ namespace PosTech.Contatos.API.Interfaces
 {
     public interface IRepository<T> where T : EntityBase
     {
-        IList<T> ObterTodos();
+        IEnumerable<T> ObterTodos();
         T ObterPorId(int id);
         void Cadastrar(T entidade);
         void Alterar(T entidade);
