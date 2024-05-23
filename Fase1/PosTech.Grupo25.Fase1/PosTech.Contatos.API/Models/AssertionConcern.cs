@@ -1,4 +1,6 @@
-﻿namespace PosTech.Contatos.API.Models
+﻿using System.Text.RegularExpressions;
+
+namespace PosTech.Contatos.API.Models
 {
     public class AssertionConcern
     {
@@ -58,6 +60,22 @@
         public static void AssertArgumentNotNull(object object1, string message)
         {
             if (object1 == null)
+            {
+                throw new DomainException(message);
+            }
+        }
+
+        /// <summary>
+        /// Validação se string é email
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="message"></param>
+        /// <exception cref="DomainException"></exception>
+        public static void AssertArgumentNotEmail(string value, string message)
+        {
+            string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+            bool isEmail = Regex.IsMatch(value, pattern);
+            if (!isEmail)
             {
                 throw new DomainException(message);
             }
