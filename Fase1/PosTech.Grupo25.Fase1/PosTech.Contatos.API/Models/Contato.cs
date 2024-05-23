@@ -26,9 +26,11 @@
             AssertionConcern.AssertArgumentNotEmpty(Email, "O e-mail não pode estar vazio!");
             AssertionConcern.AssertArgumentNotEmpty(Telefone, "O telefone não pode estar vazio!");
 
-            AssertionConcern.AssertArgumentLength(Nome, 200, "O título deve ter até 90 caracteres!");
-            AssertionConcern.AssertArgumentLength(Email, 100, "O título deve ter até 90 caracteres!");
-            AssertionConcern.AssertArgumentLength(Telefone, 20, "A legenda deve ter até 40 caracteres!");
+            AssertionConcern.AssertArgumentLength(Nome, 200, "O nome deve ter até 200 caracteres!");
+            AssertionConcern.AssertArgumentLength(Email, 100, "O e-mail deve ter até 100 caracteres!");
+            AssertionConcern.AssertArgumentLength(Telefone, 20, "O telefone deve ter até 20 caracteres!");
+
+            AssertionConcern.AssertArgumentNotEmail(Email, "O e-mail informado não é um e-mail válido!");
         }
     }
 }
