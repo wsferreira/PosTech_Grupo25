@@ -84,7 +84,7 @@ namespace PosTech.Contatos.API.Controllers
 
         [HttpPut("Alterar")]
         [AllowAnonymous]
-        public IActionResult Alterar(InputContatoAlterar contato)
+        public IActionResult Alterar([FromForm] InputContatoAlterar contato)
         {
             try
             {
