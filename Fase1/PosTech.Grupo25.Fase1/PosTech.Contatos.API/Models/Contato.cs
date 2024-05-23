@@ -1,4 +1,6 @@
-﻿namespace PosTech.Contatos.API.Models
+﻿using System.Text.Json.Serialization;
+
+namespace PosTech.Contatos.API.Models
 {
     public class Contato : EntityBase
     {
@@ -14,10 +16,15 @@
             ValidarEntidade();
         }
 
+        [JsonPropertyName ("nome")]
         public required string Nome { get; set; }
+        [JsonPropertyName("email")]
         public required string Email { get; set; }
+        [JsonPropertyName("telefone")]
         public required string Telefone { get; set; }
+        [JsonPropertyName("regiaoid")]
         public required int RegiaoId { get; set; }
+        [JsonPropertyName("regiao")]
         public virtual Regiao? Regiao { get; set; }
 
         public void ValidarEntidade()

@@ -1,8 +1,81 @@
-﻿@{
+﻿@using PosTech.Contatos.API.Models
+@model List<Contato>
+<script type="text/javascript" src="~/js/new_js.js"></script>
+@{
     ViewData["Title"] = "Home Page";
+    var lista = Html.ViewData;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="content">
+    <div class="card-footer" style="justify-content:left">
+        <button class="btn btn-primary" onclick="Adicionar()">
+            <i class="material-icons">add</i> Novo Contato
+            <div class="ripple-container"></div>
+        </button>
+    </div>
+    <div class="container-fluid">
+        <table id="home" class="display cell-border compact hover order-column row-border stripe dataTable" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>E-mail</th>
+                    <th>Telefone</th>
+                    <th>Código da Região</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    @if (Model.Count > 0)
+                    {
+                        foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>
+                                <p style="display: none;">@item.Id</p>
+                                <p class="text-xs font-weight-bold mb-0">@item.Id</p>
+                            </td>
+                            <td>
+                                <p style="display: none;">@item.Nome</p>
+                                <p class="text-xs font-weight-bold mb-0">@item.Nome</p>
+                            </td>
+                            <td>
+                                <p style="display: none;">@item.Email</p>
+                                <p class="text-xs font-weight-bold mb-0">@item.Email</p>
+                            </td>
+                            <td>
+                                <p style="display: none">@item.Telefone</p>
+                                <p class="text-xs font-weight-bold mb-0">@item.Telefone</p>
+                            </td>
+                            <td>
+                                <p class="text-xs mb-0">@item.Regiao</p>
+                            </td>
+                            <td class="td-actions text-right" style="width:60.8125px;">
+                                <button type="button" rel="tooltip" class="btn btn-primary" data-target="#divModalEdit" data-original-title="Editar Registro" onclick="Editar(@item.Id)">
+                                    <i class="material-icons">edit</i>
+                                </button>
+                                <button type="button" rel="tooltip" class="btn btn-danger" data-original-title="Excluir Registro" onclick="Deletar(@item.Id)">
+                                    <i class="material-icons">close</i>
+                                </button>
+                            </td>
+
+                        </tr>
+                        }
+                    }
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
 </div>
+
+<script type="text/javascript">
+    new DataTable('#home');
+
+    function Adicionar() {
+        window.location.href = "http://localhost:5299/Add";
+    }
+
+</script>
+
