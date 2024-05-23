@@ -1,0 +1,43 @@
+﻿@using PosTech.Contatos.API.Models
+@{
+    ViewData["Title"] = "AdicionaContato";
+}
+@model Contato
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>UsuarioModel</legend>
+
+        <div class="editor-label">@Html.LabelFor(model => model)</div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Nome)
+            @Html.ValidationMessageFor(model => model.Nome)
+        </div>
+
+        <div class="editor-label">@Html.LabelFor(model => model.Email)</div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <div class="editor-label">@Html.LabelFor(model => model.Telefone)</div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Telefone)
+            @Html.ValidationMessageFor(model => model.Telefone)
+        </div>
+
+        <div class="editor-label">@Html.LabelFor(model => model.RegiaoId)</div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RegiaoId)
+            @Html.ValidationMessageFor(model => model.RegiaoId)
+        </div>
+    
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Voltar", "Index")
+</div>
