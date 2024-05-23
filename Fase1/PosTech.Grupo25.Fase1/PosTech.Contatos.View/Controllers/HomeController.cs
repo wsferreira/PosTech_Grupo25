@@ -57,9 +57,15 @@ namespace PosTech.Contatos.View.Controllers
             return View(list);
         }
 
-        [Route("Add")]
-        public IActionResult Add()
+        public IActionResult AdicionaContato()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AdicionaUsuario(Contato _contatoModel)
+        {
+            //_usuarios.CriaUsuario(_contatoModel);
             return View();
         }
 

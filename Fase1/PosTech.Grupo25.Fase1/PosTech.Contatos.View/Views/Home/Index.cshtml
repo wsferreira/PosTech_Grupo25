@@ -7,12 +7,10 @@
 }
 
 <div class="content">
-    <div class="card-footer" style="justify-content:left">
-        <button class="btn btn-primary" onclick="Adicionar()">
-            <i class="material-icons">add</i> Novo Contato
-            <div class="ripple-container"></div>
-        </button>
-    </div>
+    <p>
+        @Html.ActionLink("Novo Contato", "AdicionaContato")
+    </p>
+
     <div class="container-fluid">
         <table id="home" class="display cell-border compact hover order-column row-border stripe dataTable" style="width:100%">
             <thead>
@@ -49,7 +47,7 @@
                                 <p class="text-xs font-weight-bold mb-0">@item.Telefone</p>
                             </td>
                             <td>
-                                <p class="text-xs mb-0">@item.Regiao</p>
+                                <p class="text-xs mb-0">@item.RegiaoId</p>
                             </td>
                             <td class="td-actions text-right" style="width:60.8125px;">
                                 <button type="button" rel="tooltip" class="btn btn-primary" data-target="#divModalEdit" data-original-title="Editar Registro" onclick="Editar(@item.Id)">
