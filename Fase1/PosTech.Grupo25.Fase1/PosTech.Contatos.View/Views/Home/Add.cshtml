@@ -5,77 +5,40 @@
 
 <div class="container_form">
     <h1>Cadastro</h1>
-    <form class="form" action="#" method="post">
+    <form class="form" action="http://localhost:5048/api/Contato/Cadastrar" method="post">
 
         <div class="form_grupo">
             <label for="nome" class="form_label">Nome</label>
-            <input type="text" name="nome" class="form_input" id="nome" placeholder="Nome" required>
+            <input type="text" name="nome" class="form_input" id="nome" style="width:90%" placeholder="Nome" required>
         </div>
 
         <div class="form_grupo">
             <label for="e-mail" class="form_label">Email</label>
-            <input type="email" name="email" class="form_input" id="email" placeholder="seuemail@email.com" required>
+            <input type="email" name="email" class="form_input" id="email" style="width:90%" placeholder="seuemail@email.com" required>
         </div>
 
         <div class="form_grupo">
             <label for="datanascimento" class="form_label">Telefone</label>
-            <input type="date" name="datanascimento" class="form_input" id="datanascimento" placeholder="Telefone" required>
+            <input type="tel" name="datanascimento" class="form_input" id="telefone" style="width:90%" placeholder="(11)11111-1111" required>
         </div>
         <div class="form_grupo">
 
-            <label for="estadocivil" class="text">Estado civil</label>
-            <select name="estadocivil" class="dropdown" required>
+            <label for="regiao" class="text">DDD</label>
+            <select name="regiao" class="dropdown" style="width:90%" required>
 
                 <option selected disabled class="form_select_option" value="">Selecione</option>
-                <option value="Solteiro" class="form_select_option">Solteiro(a)</option>
-                <option value="Casado" class="form_select_option">Casado(a) </option>
-                <option value="Divorciado" class="form_select_option">Divorciado(a)</option>
-                <option value="Viúvo" class="form_select_option">Viúvo(a)</option>
+                <option value="11" class="form_select_option">São Paulo</option>
+                <option value="12" class="form_select_option">Vale do Paraíba </option>
+                <option value="13" class="form_select_option">Vale Ribeira</option>
+                <option value="15" class="form_select_option">Sorocaba</option>
 
             </select>
         </div>
-        <div class="form_grupo">
-            <span class="legenda">Sexo:</span>
+        <div class="submit" style="align-items: center; display:flex;">
+            <input type="hidden" name="acao" value="enviar">
+            <button type="submit" name="Submit" class="submit_btn">Cadastrar</button>
 
-            <div class="radio-btn">
-                <input type="radio" class="form_new_input" id="masculino" name="sexo" value="Masculino" required="required">
-                <label for="masculino" class="radio_label form_label"> <span class="radio_new_btn"></span> Masculino</label>
-            </div>
-            <div class="radio-btn">
-                <input type="radio" class="form_new_input" id="feminino" name="sexo" value="Feminino" required="required">
-                <label for="feminino" class="radio_label form_label"> <span class="radio_new_btn"></span> Feminino</label>
-            </div>
         </div>
-
-        <div class="form_grupo">
-            <span class="legenda">Você quer aprender o que ?</span>
-            <div class="check-btn">
-                <input type="checkbox" class="form_new_input" id="html5" name="aprender" value="html5">
-                <label for="html5" class="form_label check_label"> <span class="check_new_btn"></span> Html5</label>
-            </div>
-            <div class="check-btn">
-                <input type="checkbox" class="form_new_input" id="css3" name="aprender" value="css3">
-                <label for="css3" class="form_label check_label"><span class="check_new_btn"></span> Css3</label>
-            </div>
-            <div class="check-btn">
-                <input type="checkbox" class="form_new_input" id="jquery" name="aprender" value="jquery">
-                <label for="jquery" class="form_label check_label"><span class="check_new_btn"></span> jQuery</label>
-            </div>
-            <div class="check-btn">
-                <input type="checkbox" class="form_new_input" id="wordpress" name="aprender" value="wordpress">
-                <label for="wordpress" class="form_label check_label"><span class="check_new_btn"></span> WordPress</label>
-            </div>
-
-            <div class="form_message">
-
-                <label for="message" class="form_message_label"> Digite aqui sua sua mensagem:</label>
-                <textarea name="mensagem" id="message" cols="30" rows="3" class="form_input message_input" required></textarea>
-            </div>
-            <div class="submit">
-                <input type="hidden" name="acao" value="enviar">
-                <button type="submit" name="Submit" class="submit_btn">Cadastrar</button>
-
-            </div>
     </form>
 </div><!--container_form-->
 

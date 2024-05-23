@@ -62,7 +62,7 @@ namespace PosTech.Contatos.API.Controllers
 
        [HttpPost("Cadastrar")]
        [AllowAnonymous]
-        public IActionResult Cadastrar(InputContatoCadastrar contato)
+        public IActionResult Cadastrar([FromForm]InputContatoCadastrar contato)
         {
             try
             {
