@@ -66,7 +66,7 @@ namespace PosTech.Contatos.View.Controllers
         public ActionResult AdicionaUsuario(Contato _contatoModel)
         {
             //_usuarios.CriaUsuario(_contatoModel);
-            return View();
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
