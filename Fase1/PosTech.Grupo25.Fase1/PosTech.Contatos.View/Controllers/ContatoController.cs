@@ -20,13 +20,13 @@ namespace PosTech.Contatos.View.Controllers
             return View(list);
         }
 
-        public IActionResult AdicionaContato()
+        public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Cadastrar(Contato _contato)
+        public ActionResult Create(Contato _contato)
         {
             try
             {
