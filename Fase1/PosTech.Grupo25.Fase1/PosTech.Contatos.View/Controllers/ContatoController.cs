@@ -46,7 +46,7 @@ namespace PosTech.Contatos.View.Controllers
             {
                 string? applicationUrl = _configuration.GetValue<string>("Authentication:ApplicationUrl");
                 HttpClient cliente = new HttpClient();
-                using (var response = cliente.GetAsync(applicationUrl + "ObterPorId/" + id).Result)
+                using (var response = cliente.GetAsync(applicationUrl + "Deletar/" + id).Result)
                 {
                     if (response.IsSuccessStatusCode)
                     {
