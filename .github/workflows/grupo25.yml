@@ -9,6 +9,9 @@ on:
 jobs:
     build-and-test:
         runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                solution-path: ['./Fase1/PosTech.Grupo25.Fase1']
 
         steps:
             - name: Checkout do código
@@ -20,10 +23,13 @@ jobs:
                 dotnet-version: '8.x'
 
             - name: Instalando dependências
+              working-directory: ${{matrix.solution-path}}
               run: dotnet restore
 
             - name: Build
+              working-directory: ${{matrix.solution-path}}
               run: dotnet build
 
             - name: Teste
+              working-directory: ${{matrix.solution-path}}
               run: dotnet test
