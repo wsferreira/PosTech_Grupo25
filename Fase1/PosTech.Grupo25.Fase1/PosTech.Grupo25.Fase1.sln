@@ -8,6 +8,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PosTech.Contatos.API.Tests", "PosTech.Contatos.API.Tests\PosTech.Contatos.API.Tests.csproj", "{A9ED86AC-220F-4EE0-8E33-08D208C0E0F9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{51ECD13E-2342-461D-8720-D4614B2170EA}"
+	ProjectSection(SolutionItems) = preProject
+		dockerfile = dockerfile
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{A0B0F0AA-7A7C-42C7-B4AB-0C2BE4405FFB}"
 EndProject
