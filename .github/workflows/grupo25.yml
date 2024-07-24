@@ -1,10 +1,9 @@
-name: CI/CD Pipeline do Grupo 25
+name: CI Pipeline do Grupo 25
 
 on:
     push:
         branches:
             - main
-            - gh_actions
 
 jobs:
     build-and-test:
@@ -26,10 +25,10 @@ jobs:
               working-directory: ${{matrix.solution-path}}
               run: dotnet restore
 
-            - name: Build
+            - name: Build da aplicação
               working-directory: ${{matrix.solution-path}}
               run: dotnet build
 
-            - name: Teste
+            - name: Testes Unitários
               working-directory: ${{matrix.solution-path}}
               run: dotnet test
