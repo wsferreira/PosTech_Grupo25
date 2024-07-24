@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using PosTech.Contatos.API.Interfaces;
 using PosTech.Contatos.API.Repository;
 using PosTech.Contatos.API.Services;
+using Prometheus;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -51,8 +52,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseHttpMetrics();
+
 app.UseAuthorization();
 
+app.MapMetrics();
 app.MapControllers();
 
 app.Run();
