@@ -1,0 +1,34 @@
+name: CI Pipeline do Grupo 25
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    build-and-test:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                solution-path: ['./Fase1/PosTech.Grupo25.Fase1']
+
+        steps:
+            - name: Checkout do código
+              uses: actions/checkout@v4
+
+            - name: Setup .NET 8.x
+              uses: actions/setup-dotnet@v4
+              with:
+                dotnet-version: '8.x'
+
+            - name: Instalando dependências
+              working-directory: ${{matrix.solution-path}}
+              run: dotnet restore
+
+            - name: Build da aplicação
+              working-directory: ${{matrix.solution-path}}
+              run: dotnet build
+
+            - name: Testes Unitários
+              working-directory: ${{matrix.solution-path}}
+              run: dotnet test
