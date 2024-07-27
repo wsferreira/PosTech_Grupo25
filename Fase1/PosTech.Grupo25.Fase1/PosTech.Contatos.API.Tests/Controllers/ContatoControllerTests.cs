@@ -105,7 +105,7 @@ namespace PosTech.Contatos.API.Tests.Controllers
             var result = controller.Cadastrar(contato);
 
             // Assert
-            var okResult = Assert.IsType<OkResult>(result);
+            var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.Equal(200, okResult.StatusCode);
 
         }
@@ -138,7 +138,7 @@ namespace PosTech.Contatos.API.Tests.Controllers
             // Act
             var result = controller.Alterar(contato);
             // Assert
-            var okResult = Assert.IsType<OkResult>(result);
+            var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.Equal(200, okResult.StatusCode);
         }
 

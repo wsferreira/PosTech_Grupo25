@@ -74,7 +74,7 @@ namespace PosTech.Contatos.API.Controllers
                     RegiaoId = contato.RegiaoId 
                 };
                 _contatoService.Cadastrar(cont);
-                return Ok();
+                return Ok(contato);
             }
             catch (Exception ex)
             {
@@ -98,7 +98,7 @@ namespace PosTech.Contatos.API.Controllers
                 };
 
                 _contatoService.Alterar(cont);
-                return Ok();// Created("", AlterarCadastro);
+                return Ok(cont);// Created("", AlterarCadastro);
             }
             catch (Exception ex)
             {
