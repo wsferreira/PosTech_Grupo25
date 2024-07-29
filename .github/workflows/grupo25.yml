@@ -29,6 +29,6 @@ jobs:
               working-directory: ${{matrix.solution-path}}
               run: dotnet build
 
-            - name: Testes Unitários
+            - name: Testes Unitário/Integração
               working-directory: ${{matrix.solution-path}}
               run: dotnet test
