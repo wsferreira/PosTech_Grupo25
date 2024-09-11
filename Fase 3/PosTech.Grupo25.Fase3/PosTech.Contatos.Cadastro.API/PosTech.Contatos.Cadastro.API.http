@@ -1,0 +1,6 @@
+@PosTech.Contatos.Cadastro.API_HostAddress = http://localhost:5214
+
+GET {{PosTech.Contatos.Cadastro.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
