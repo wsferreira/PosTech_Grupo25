@@ -10,7 +10,7 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                solution-path: ['./Fase1/PosTech.Grupo25.Fase1']
+                solution-path: ['./Fase 3/PosTech.Grupo25.Fase3']
 
         steps:
             - name: Checkout do código
