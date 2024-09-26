@@ -1,4 +1,5 @@
-﻿using PosTech.Entidades;
+﻿using PosTech.Cadastro.Consumer.Interfaces;
+using PosTech.Entidades;
 using PosTech.Repository;
 using PosTech.Repository.Interfaces;
 using System;

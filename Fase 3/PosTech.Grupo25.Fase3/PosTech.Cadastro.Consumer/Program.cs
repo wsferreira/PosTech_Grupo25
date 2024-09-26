@@ -3,6 +3,7 @@ using PosTech.Cadastro.Consumer;
 using PosTech.Repository.Interfaces;
 using PosTech.Repository;
 using PosTech.Cadastro.Consumer.Services;
+using PosTech.Cadastro.Consumer.Interfaces;
 
 var builder = Host.CreateApplicationBuilder(args);
 

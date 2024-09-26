@@ -3,23 +3,26 @@ using PosTech.Entidades;
 using RabbitMQ.Client;
 using System.Text.Json;
 using System.Text;
+using PosTech.Repository.Interfaces;
 
 namespace PosTech.Contatos.Cadastro.API.Services
 {
     public class ContatoService : IContatoService
     {
         private readonly IConfiguration _configuration;
+        private readonly IRegiaoRepository _regiaoRepository;
 
-        public ContatoService(IConfiguration configuration)
+        public ContatoService(IConfiguration configuration, IRegiaoRepository regiaoRepository)
         {
             _configuration = configuration;
+            _regiaoRepository = regiaoRepository;
 
         }
         public void Cadastrar(Contato contato)
         {
             //TODO: ADICIONAR REPOSITORY PARA VERIFICAR REGIÃO
             contato.ValidarEntidade();
-            //VerificaRegiaoExiste(contato.RegiaoId);
+            VerificaRegiaoExiste(contato.RegiaoId);
 
             var nomeFila = _configuration.GetSection("RabbitMQ")["NomeFila"] ?? string.Empty;
             var usuario = _configuration.GetSection("RabbitMQ")["Usuario"] ?? string.Empty;
@@ -46,6 +49,15 @@ namespace PosTech.Contatos.Cadastro.API.Services
                     routingKey: nomeFila,
                     basicProperties: null,
                     body: body);
+            }
+        }
+
+        protected void VerificaRegiaoExiste(int id)
+        {
+            var cont = _regiaoRepository.ObterPorId(id);
+            if (cont == null)
+            {
+                throw new DomainException("DDD não encontrado.");
             }
         }
     }

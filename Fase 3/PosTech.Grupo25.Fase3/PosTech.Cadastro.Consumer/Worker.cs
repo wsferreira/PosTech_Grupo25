@@ -1,5 +1,5 @@
 using Microsoft.Extensions.Configuration;
-using PosTech.Cadastro.Consumer.Services;
+using PosTech.Cadastro.Consumer.Interfaces;
 using PosTech.Entidades;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
