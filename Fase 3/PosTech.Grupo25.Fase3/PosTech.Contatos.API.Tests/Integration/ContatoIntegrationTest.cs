@@ -7,22 +7,50 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-using PosTech.Contatos.API.Controllers;
-using PosTech.Contatos.API.Interfaces;
-using PosTech.Contatos.API.Services;
 using PosTech.Entidades;
 using PosTech.Repository;
+using Microsoft.Extensions.Configuration;
+using PosTech.Contatos.API.Controllers;
+using PosTech.Contatos.API.Services;
+using PosTech.Contatos.Cadastro.API.Controllers;
+using PosTech.Contatos.Cadastro.API.Services;
+using PosTech.Contatos.Alteracao.API.Controllers;
+using PosTech.Contatos.Alteracao.API.Services;
+using PosTech.Contatos.Exclusao.API.Controllers;
+using PosTech.Contatos.Exclusao.API.Services;
+using PosTech.Cadastro.Consumer.Services;
+using PosTech.Alteracao.Consumer.Services;
+using PosTech.Exclusao.Consumer.Services;
 
 namespace PosTech.Contatos.API.Tests.Integration
 {
 
     public class ContatoIntegrationTest
     {
+        private IConfiguration _configuration = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json")
+            .Build();
+
+        //API 
         private readonly ContatoRepository _contatoRepository;
-        private readonly ContatoService _contatoService;
         private readonly ContatoController _contatoController;
+        private readonly ContatoService _contatoService;
         private readonly RegiaoRepository _regiaoRepository;
         private readonly ApplicationDbContext _context;
+
+        //APIs - RabbitMQ
+        //Producers
+        private readonly ContatoControllerCriacaoProducer _contatoControllerCriacaoProducer;
+        private readonly ContatoControllerAlteracaoProducer _contatoControllerAlteracaoProducer;
+        private readonly ContatoControllerExclusaoProducer _contatoControllerExclusaoProducer;
+        private readonly ContatoServiceCriacaoProducer _contatoServiceCriacaoProducer;
+        private readonly ContatoServiceAlteracaoProducer _contatoServiceAlteracaoProducer;
+        private readonly ContatoServiceExclusaoProducer _contatoServiceExclusaoProducer;
+
+        //Consumers
+        private readonly ContatoServiceCriacaoConsumer _contatoServiceCriacaoConsumer;
+        private readonly ContatoServiceAlteracaoConsumer _contatoServiceAlteracaoConsumer;
+        private readonly ContatoServiceExclusaoConsumer _contatoServiceExclusaoConsumer;
 
         public ContatoIntegrationTest()
         {
@@ -37,6 +65,18 @@ namespace PosTech.Contatos.API.Tests.Integration
             _regiaoRepository = new RegiaoRepository(_context);
             _contatoService = new ContatoService(_contatoRepository, _regiaoRepository);
             _contatoController = new ContatoController(_contatoService);
+
+            _contatoServiceCriacaoProducer = new ContatoServiceCriacaoProducer(_configuration, _regiaoRepository);
+            _contatoServiceAlteracaoProducer = new ContatoServiceAlteracaoProducer(_configuration, _contatoRepository, _regiaoRepository);
+            _contatoServiceExclusaoProducer = new ContatoServiceExclusaoProducer(_configuration, _contatoRepository);
+            _contatoControllerCriacaoProducer = new ContatoControllerCriacaoProducer(_contatoServiceCriacaoProducer);
+            _contatoControllerAlteracaoProducer = new ContatoControllerAlteracaoProducer(_contatoServiceAlteracaoProducer);
+            _contatoControllerExclusaoProducer = new ContatoControllerExclusaoProducer(_contatoServiceExclusaoProducer);
+
+            _contatoServiceCriacaoConsumer = new ContatoServiceCriacaoConsumer(_contatoRepository);
+            _contatoServiceAlteracaoConsumer = new ContatoServiceAlteracaoConsumer(_contatoRepository);
+            _contatoServiceExclusaoConsumer = new ContatoServiceExclusaoConsumer(_contatoRepository);
+
 
             //Exemplos de Região
             List<Regiao> list = new List<Regiao>()
@@ -125,10 +165,10 @@ namespace PosTech.Contatos.API.Tests.Integration
         {
             //Arrange
             InputContatoCadastrar contato = new InputContatoCadastrar() 
-            { Nome = "Leonardo Zanone",Email = "leozinho25@hotmail.com",Telefone = "9999-9999", RegiaoId = 11};
+            { Nome = "Wandersao",Email = "wanderson@hotmail.com",Telefone = "9999-9999", RegiaoId = 11};
 
             //Act
-            IActionResult result = _contatoController.Cadastrar(contato);
+            IActionResult result = _contatoControllerCriacaoProducer.Cadastrar(contato);
 
             //Assert
             InputContatoCadastrar resultConverted = (InputContatoCadastrar)((OkObjectResult)result).Value;

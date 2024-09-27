@@ -9,6 +9,15 @@
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.5" />
@@ -23,8 +32,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PosTech.Alteracao.Consumer\PosTech.Alteracao.Consumer.csproj" />
+    <ProjectReference Include="..\PosTech.Cadastro.Consumer\PosTech.Cadastro.Consumer.csproj" />
+    <ProjectReference Include="..\PosTech.Contatos.Alteracao.API\PosTech.Contatos.Alteracao.API.csproj" />
     <ProjectReference Include="..\PosTech.Contatos.API\PosTech.Contatos.API.csproj" />
+    <ProjectReference Include="..\PosTech.Contatos.Cadastro.API\PosTech.Contatos.Cadastro.API.csproj" />
+    <ProjectReference Include="..\PosTech.Contatos.Exclusao.API\PosTech.Contatos.Exclusao.API.csproj" />
     <ProjectReference Include="..\PosTech.Entidades\PosTech.Entidades.csproj" />
+    <ProjectReference Include="..\PosTech.Exclusao.Consumer\PosTech.Exclusao.Consumer.csproj" />
     <ProjectReference Include="..\PosTech.Repository\PosTech.Repository.csproj" />
   </ItemGroup>
 

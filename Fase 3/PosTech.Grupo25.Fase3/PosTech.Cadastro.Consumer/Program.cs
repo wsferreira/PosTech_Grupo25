@@ -19,7 +19,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 }, ServiceLifetime.Scoped);
 
-builder.Services.AddScoped<IContatoService, ContatoService>();
+builder.Services.AddScoped<IContatoServiceCriacaoConsumer, ContatoServiceCriacaoConsumer>();
 builder.Services.AddScoped<IContatoRepository, ContatoRepository>();
 
 builder.Services.AddHostedService<Worker>();

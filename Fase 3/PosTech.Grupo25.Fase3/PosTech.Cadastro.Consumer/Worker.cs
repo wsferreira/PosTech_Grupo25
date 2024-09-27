@@ -53,7 +53,7 @@ namespace PosTech.Cadastro.Consumer
                     {
                         using(IServiceScope scope = _serviceProvider.CreateScope())
                         {
-                            var _contatoService = scope.ServiceProvider.GetRequiredService<IContatoService>();
+                            var _contatoService = scope.ServiceProvider.GetRequiredService<IContatoServiceCriacaoConsumer>();
                             _contatoService.Cadastrar(contato);
                         }
                         

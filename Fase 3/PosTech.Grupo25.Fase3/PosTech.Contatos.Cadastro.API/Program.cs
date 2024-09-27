@@ -26,7 +26,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 }, ServiceLifetime.Scoped);
 
-builder.Services.AddScoped<IContatoService, ContatoService>();
+builder.Services.AddScoped<IContatoServiceCriacaoProducer, ContatoServiceCriacaoProducer>();
 builder.Services.AddScoped<IRegiaoRepository, RegiaoRepository>();
 builder.Services.AddScoped<IContatoRepository, ContatoRepository>();
 
