@@ -159,7 +159,7 @@ namespace PosTech.Contatos.API.Tests.Integration
             
         }
 
-        [Fact(DisplayName = "Validando cadastro de Contato")]
+        [Fact(DisplayName = "Validando cadastro de Contato - Producer")]
         [Trait("Categoria", "Validando adição Contato")]
         public void AddContato()
         {
@@ -180,7 +180,7 @@ namespace PosTech.Contatos.API.Tests.Integration
             Assert.Equal(contato, resultConverted);
         }
 
-        [Fact(DisplayName = "Validando exclusão de Contato")]
+        [Fact(DisplayName = "Validando exclusão de Contato - Producer")]
         [Trait("Categoria", "Validando exclusão")]
         public void DeleteContato()
         {
@@ -188,14 +188,14 @@ namespace PosTech.Contatos.API.Tests.Integration
             Contato contato = new Contato { Id = 1, Nome = "João", Email = "joao@email.com", Telefone = "1234-5678", RegiaoId = 11 };
 
             //Act
-            IActionResult result = _contatoController.Deletar(contato.Id);
+            IActionResult result = _contatoControllerExclusaoProducer.Deletar(contato.Id);
 
             //Assert
-            Assert.Null(_context.Contato.FirstOrDefault(c => c.Id == 1));
+            //Assert.Null(_context.Contato.FirstOrDefault(c => c.Id == 1));
             Assert.Contains(contato.Id.ToString(),((OkObjectResult)result).Value.ToString());
         }
 
-        [Fact(DisplayName = "Validando alteração de Contato")]
+        [Fact(DisplayName = "Validando alteração de Contato - Producer")]
         [Trait("Categoria", "Validando Alteração")]
         public void UpdateContato()
         {
@@ -204,7 +204,7 @@ namespace PosTech.Contatos.API.Tests.Integration
             InputContatoAlterar contatoAlterado = new InputContatoAlterar { Id = 1, Nome = "Maria", Email = "maria@email.com", Telefone = "1234-5679", RegiaoId = 12 };
 
             //Act
-            IActionResult result = _contatoController.Alterar(contatoAlterado);
+            IActionResult result = _contatoControllerAlteracaoProducer.Alterar(contatoAlterado);
 
             //Assert
             Contato resultConverted = (Contato)((OkObjectResult)result).Value;
