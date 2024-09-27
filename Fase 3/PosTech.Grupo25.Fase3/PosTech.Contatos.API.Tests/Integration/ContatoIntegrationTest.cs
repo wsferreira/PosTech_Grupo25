@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using PosTech.Contatos.API.Controllers;
 using PosTech.Contatos.API.Interfaces;
-using PosTech.Contatos.API.Models;
-using PosTech.Contatos.API.Repository;
 using PosTech.Contatos.API.Services;
+using PosTech.Entidades;
+using PosTech.Repository;
 
 namespace PosTech.Contatos.API.Tests.Integration
 {

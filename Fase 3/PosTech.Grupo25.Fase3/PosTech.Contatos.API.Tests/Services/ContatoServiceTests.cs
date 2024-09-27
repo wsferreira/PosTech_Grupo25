@@ -1,8 +1,8 @@
 ﻿using Moq;
 using PosTech.Contatos.API.Interfaces;
-using PosTech.Contatos.API.Models;
-using PosTech.Contatos.API.Repository;
 using PosTech.Contatos.API.Services;
+using PosTech.Entidades;
+using PosTech.Repository.Interfaces;
 using System;
 using System.Collections;
 using System.Collections.Generic;

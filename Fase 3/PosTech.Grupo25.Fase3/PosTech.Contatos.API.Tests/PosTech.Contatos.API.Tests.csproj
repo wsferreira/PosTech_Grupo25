@@ -24,6 +24,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PosTech.Contatos.API\PosTech.Contatos.API.csproj" />
+    <ProjectReference Include="..\PosTech.Entidades\PosTech.Entidades.csproj" />
+    <ProjectReference Include="..\PosTech.Repository\PosTech.Repository.csproj" />
   </ItemGroup>
 
 </Project>

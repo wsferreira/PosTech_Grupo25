@@ -7,8 +7,8 @@ namespace PosTech.Contatos.API.Interfaces
         IEnumerable<Contato> ObterTodos();        
         IEnumerable<Contato> ObterContatosPorRegiao(int regiaoDDD);
         Contato ObterPorId(int id);
-        /*void Cadastrar(Contato contato);
+        void Cadastrar(Contato contato);
         void Alterar(Contato contato);
-        void Deletar(int id);*/
+        void Deletar(int id);
     }
 }

@@ -2,7 +2,7 @@
 using Moq;
 using PosTech.Contatos.API.Controllers;
 using PosTech.Contatos.API.Interfaces;
-using PosTech.Contatos.API.Models;
+using PosTech.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;

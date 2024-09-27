@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PosTech.Contatos.API.Interfaces;
+using PosTech.Entidades;
 
 namespace PosTech.Contatos.API.Controllers
 {
@@ -59,18 +60,19 @@ namespace PosTech.Contatos.API.Controllers
             }
         }
 
-       /*[HttpPost("Cadastrar")]
-       [AllowAnonymous]
-        public IActionResult Cadastrar([FromForm]InputContatoCadastrar contato)
+        [HttpPost("Cadastrar")]
+        [AllowAnonymous]
+        public IActionResult Cadastrar([FromForm] InputContatoCadastrar contato)
         {
             try
             {
-                Contato cont = new Contato() {
+                Contato cont = new Contato()
+                {
                     Id = 0,
-                    Nome = contato.Nome   , 
-                    Email = contato.Email ,
-                    Telefone = contato.Telefone ,
-                    RegiaoId = contato.RegiaoId 
+                    Nome = contato.Nome,
+                    Email = contato.Email,
+                    Telefone = contato.Telefone,
+                    RegiaoId = contato.RegiaoId
                 };
                 _contatoService.Cadastrar(cont);
                 return Ok(contato);
@@ -112,12 +114,12 @@ namespace PosTech.Contatos.API.Controllers
             try
             {
                 _contatoService.Deletar(id);
-                return Ok("Registro "+id.ToString()+" excluido com sucesso.");
+                return Ok("Registro " + id.ToString() + " excluido com sucesso.");
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-        }*/
+        }
     }
 }
