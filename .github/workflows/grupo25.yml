@@ -1,4 +1,4 @@
-name: CI Pipeline do Grupo 25 
+name: CI Pipeline do Grupo 25 Apresentação
 
 on:
     push:
