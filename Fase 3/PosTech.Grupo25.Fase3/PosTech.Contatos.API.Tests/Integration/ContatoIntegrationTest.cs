@@ -28,7 +28,7 @@ namespace PosTech.Contatos.API.Tests.Integration
     public class ContatoIntegrationTest
     {
         private IConfiguration _configuration = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json")
+            .AddJsonFile("appsettings2.json")
             .Build();
 
         //API 

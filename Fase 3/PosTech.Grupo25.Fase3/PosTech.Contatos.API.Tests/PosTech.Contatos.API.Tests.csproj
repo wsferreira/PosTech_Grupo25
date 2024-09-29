@@ -43,4 +43,10 @@
     <ProjectReference Include="..\PosTech.Repository\PosTech.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="appsettings2.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
