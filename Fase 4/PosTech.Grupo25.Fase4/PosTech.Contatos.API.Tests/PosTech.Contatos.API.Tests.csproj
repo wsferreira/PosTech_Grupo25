@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.5" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="Moq" Version="4.20.70" />
+    <PackageReference Include="xunit" Version="2.5.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PosTech.Alteracao.Consumer\PosTech.Alteracao.Consumer.csproj" />
+    <ProjectReference Include="..\PosTech.Cadastro.Consumer\PosTech.Cadastro.Consumer.csproj" />
+    <ProjectReference Include="..\PosTech.Contatos.Alteracao.API\PosTech.Contatos.Alteracao.API.csproj" />
+    <ProjectReference Include="..\PosTech.Contatos.API\PosTech.Contatos.API.csproj" />
+    <ProjectReference Include="..\PosTech.Contatos.Cadastro.API\PosTech.Contatos.Cadastro.API.csproj" />
+    <ProjectReference Include="..\PosTech.Contatos.Exclusao.API\PosTech.Contatos.Exclusao.API.csproj" />
+    <ProjectReference Include="..\PosTech.Entidades\PosTech.Entidades.csproj" />
+    <ProjectReference Include="..\PosTech.Exclusao.Consumer\PosTech.Exclusao.Consumer.csproj" />
+    <ProjectReference Include="..\PosTech.Repository\PosTech.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings2.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

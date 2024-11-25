@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postech-api-pod
+  labels:
+    app: postech-api
+spec:
+  containers:
+  - name: postech-api-container
+    image: wferreirasp/postech-api-consulta:latest
+    ports:
+    - containerPort: 8080

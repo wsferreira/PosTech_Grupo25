@@ -1,0 +1,98 @@
+﻿@model IEnumerable<PosTech.Contatos.API.Models.Contato>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<h1>Lista de Contatos</h1>
+
+<p>
+    <a asp-action="Create">Adicionar novo contato</a>
+</p>
+
+<form class="form-inline">
+    <div class="form-group mb-2">
+        <label class="control-label">Pesquisar contatos por DDD:</label>
+    </div>
+    <div class="form-group mb-2">
+        <input type="text" id="dddRegiao" class="form-control" />
+    </div>
+    <input type="button" value="Pesquisar" class="btn btn-primary" onclick="Pesquisar()" />
+    <input type="button" value="Limpar" class="btn btn-primary" asp-action="Index" />
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegiaoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefone)
+            </th>
+        
+          
+            <th>
+                @Html.DisplayNameFor(model => model.DataCriacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataUltimaAlteracao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegiaoId)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefone)
+            </td>
+            
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.DataCriacao)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataUltimaAlteracao)
+                </td>
+            
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Detalhes", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Excluir", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+<script type="text/javascript">
+        function Pesquisar(){
+        var id = $('#dddRegiao').val();
+        window.location = '/Contato/Index/' + id;
+    }
+</script>

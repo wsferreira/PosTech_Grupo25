@@ -59,7 +59,7 @@ namespace PosTech.Contatos.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        /*
         [HttpPost("Cadastrar")]
         [AllowAnonymous]
         public IActionResult Cadastrar([FromForm] InputContatoCadastrar contato)
@@ -120,6 +120,6 @@ namespace PosTech.Contatos.API.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        }
+        }*/
     }
 }
