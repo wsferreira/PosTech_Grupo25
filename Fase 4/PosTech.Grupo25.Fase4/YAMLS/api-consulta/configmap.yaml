@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: postech-api-config
 data:
-  ConnectionStrings__ConnectionStringSql: "Data Source=host.docker.internal,1434;Initial Catalog=postech_fase1;User ID=${DB_USERNAME};Password=${DB_PASSWORD};TrustServerCertificate=True"
+  ConnectionStrings__ConnectionStringSql: "Data Source=host.docker.internal,1433;Initial Catalog=postech_fase1;User ID=${DB_USERNAME};Password=${DB_PASSWORD};TrustServerCertificate=True"

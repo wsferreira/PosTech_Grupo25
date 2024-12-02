@@ -20,7 +20,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(configuration.GetConnectionString("ConnectionStringSql"));
     //options.UseLazyLoadingProxies();
-    options.EnableSensitiveDataLogging(true); // ADD Antonio José Lima Jr -> 18/05/2024
+    options.EnableSensitiveDataLogging(true); // ADD Antonio Josï¿½ Lima Jr -> 18/05/2024
 
 }, ServiceLifetime.Scoped);
 
@@ -31,11 +31,11 @@ builder.Services.AddScoped<IContatoRepository, ContatoRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 
 app.UseHttpsRedirection();
 
