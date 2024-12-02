@@ -31,15 +31,20 @@ COPY PosTech.Alteracao.Consumer/. ./PosTech.Alteracao.Consumer/
 COPY PosTech.Exclusao.Consumer/. ./PosTech.Exclusao.Consumer/
 
 # Definir o nome da API como argumento de build
-ARG API_NAME=PosTech.Contatos.API
+ARG API_NAME
 WORKDIR /App/${API_NAME}
 
 #build e publisj do app
-RUN dotnet publish -c Release -o out
+RUN dotnet publish -c Release -o out && ls -la out
 
 #Build da imagem runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /App
+
+# Re-declare ARG no estágio final
+ARG API_NAME
+
+# Copiar a saída publicada para a imagem final
 COPY --from=build-env /App/${API_NAME}/out ./
 
 #Expondo a porta que a aplicação vai rodar
