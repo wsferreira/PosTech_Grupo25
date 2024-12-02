@@ -30,7 +30,9 @@ COPY PosTech.Cadastro.Consumer/. ./PosTech.Cadastro.Consumer/
 COPY PosTech.Alteracao.Consumer/. ./PosTech.Alteracao.Consumer/
 COPY PosTech.Exclusao.Consumer/. ./PosTech.Exclusao.Consumer/
 
-WORKDIR /App/PosTech.Contatos.API
+# Definir o nome da API como argumento de build
+ARG API_NAME=PosTech.Contatos.API
+WORKDIR /App/${API_NAME}
 
 #build e publisj do app
 RUN dotnet publish -c Release -o out
@@ -38,9 +40,9 @@ RUN dotnet publish -c Release -o out
 #Build da imagem runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /App
-COPY --from=build-env /App/PosTech.Contatos.API/out ./
+COPY --from=build-env /App/${API_NAME}/out ./
 
 #Expondo a porta que a aplicação vai rodar
 EXPOSE 8080
 
-ENTRYPOINT [ "dotnet", "PosTech.Contatos.API.dll" ]
+ENTRYPOINT [ "dotnet", "${API_NAME}.dll" ]
