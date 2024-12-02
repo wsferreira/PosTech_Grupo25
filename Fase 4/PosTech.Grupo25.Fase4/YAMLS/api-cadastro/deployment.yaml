@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postech-api-cadastro-deployment
+  labels:
+    app: postech-api-cadastro
+spec:
+  selector:
+    matchLabels:
+      app: postech-api-cadastro
+  template:
+    metadata:
+      labels:
+        app: postech-api-cadastro
+    spec:
+      containers:
+      - name: postech-api-cadastro-container
+        image: wferreirasp/postech-api-cadastro:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+ 
+
+
