@@ -38,28 +38,28 @@ jobs:
 
             - name: Construir a imagem Docker - API Consulta
               working-directory: ${{ matrix.solution-path }}
-              run: docker build -t ${{ secrets.DOCKER_USERNAME }}/postech-api-consulta:latest --build-arg API_NAME=PosTech.Contatos.API .
+              run: docker build -t ${{ secrets.DOCKER_USERNAME }}/postech-api-consulta:latest -f Dockerfile-consulta .
 
             - name: Fazer push da imagem para o Docker Hub - API Consulta
               run: docker push ${{ secrets.DOCKER_USERNAME }}/postech-api-consulta:latest
               
             - name: Construir a imagem Docker - API Cadastro
               working-directory: ${{ matrix.solution-path }}
-              run: docker build -t ${{ secrets.DOCKER_USERNAME }}/postech-api-cadastro:latest --build-arg API_NAME=PosTech.Contatos.Cadastro.API .
+              run: docker build -t ${{ secrets.DOCKER_USERNAME }}/postech-api-cadastro:latest -f Dockerfile-cadastro .
 
             - name: Fazer push da imagem para o Docker Hub - API Cadastro
               run: docker push ${{ secrets.DOCKER_USERNAME }}/postech-api-cadastro:latest
               
             - name: Construir a imagem Docker - API Alteração
               working-directory: ${{ matrix.solution-path }}
-              run: docker build -t ${{ secrets.DOCKER_USERNAME }}/postech-api-alteracao:latest --build-arg API_NAME=PosTech.Contatos.Alteracao.API .
+              run: docker build -t ${{ secrets.DOCKER_USERNAME }}/postech-api-alteracao:latest -f Dockerfile-alteracao .
 
             - name: Fazer push da imagem para o Docker Hub - API Alteração
               run: docker push ${{ secrets.DOCKER_USERNAME }}/postech-api-alteracao:latest
               
             - name: Construir a imagem Docker - API Exclusão
               working-directory: ${{ matrix.solution-path }}
-              run: docker build -t ${{ secrets.DOCKER_USERNAME }}/postech-api-exclusao:latest --build-arg API_NAME=PosTech.Contatos.Exclusao.API .
+              run: docker build -t ${{ secrets.DOCKER_USERNAME }}/postech-api-exclusao:latest -f Dockerfile-exclusao .
 
             - name: Fazer push da imagem para o Docker Hub - API Exclusão
               run: docker push ${{ secrets.DOCKER_USERNAME }}/postech-api-exclusao:latest
