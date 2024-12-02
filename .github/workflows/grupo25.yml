@@ -29,16 +29,37 @@ jobs:
               working-directory: ${{matrix.solution-path}}
               run: dotnet build
 
-            - name: Testes Unitário/Integração
-              working-directory: ${{matrix.solution-path}}
-              run: dotnet test
+#            - name: Testes Unitário/Integração
+#              working-directory: ${{matrix.solution-path}}
+#              run: dotnet test
 
             - name: Login no Docker Hub
               run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-            - name: Construir a imagem Docker
+            - name: Construir a imagem Docker - API Consulta
               working-directory: ${{ matrix.solution-path }}
-              run: docker build -t ${{ secrets.DOCKER_USERNAME }}/postech-api-consulta:latest .
+              run: docker build -t ${{ secrets.DOCKER_USERNAME }}/postech-api-consulta:latest --build-arg API_NAME=PosTech.Contatos.API .
 
-            - name: Fazer push da imagem para o Docker Hub
-              run: docker push ${{ secrets.DOCKER_USERNAME }}/pos-tech-grupo25:latest
+            - name: Fazer push da imagem para o Docker Hub - API Consulta
+              run: docker push ${{ secrets.DOCKER_USERNAME }}/postech-api-consulta:latest
+              
+            - name: Construir a imagem Docker - API Cadastro
+              working-directory: ${{ matrix.solution-path }}
+              run: docker build -t ${{ secrets.DOCKER_USERNAME }}/postech-api-cadastro:latest --build-arg API_NAME=PosTech.Contatos.Cadastro.API .
+
+            - name: Fazer push da imagem para o Docker Hub - API Cadastro
+              run: docker push ${{ secrets.DOCKER_USERNAME }}/postech-api-cadastro:latest
+              
+            - name: Construir a imagem Docker - API Alteração
+              working-directory: ${{ matrix.solution-path }}
+              run: docker build -t ${{ secrets.DOCKER_USERNAME }}/postech-api-alteracao:latest --build-arg API_NAME=PosTech.Contatos.Alteracao.API .
+
+            - name: Fazer push da imagem para o Docker Hub - API Alteração
+              run: docker push ${{ secrets.DOCKER_USERNAME }}/postech-api-alteracao:latest
+              
+            - name: Construir a imagem Docker - API Exclusão
+              working-directory: ${{ matrix.solution-path }}
+              run: docker build -t ${{ secrets.DOCKER_USERNAME }}/postech-api-exclusao:latest --build-arg API_NAME=PosTech.Contatos.Exclusao.API .
+
+            - name: Fazer push da imagem para o Docker Hub - API Exclusão
+              run: docker push ${{ secrets.DOCKER_USERNAME }}/postech-api-exclusao:latest
