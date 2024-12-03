@@ -187,6 +187,7 @@ namespace PosTech.Contatos.API.Tests.Integration
             //Arrange
             Contato contato = new Contato { Id = 1, Nome = "João", Email = "joao@email.com", Telefone = "1234-5678", RegiaoId = 11 };
 
+
             //Act
             //IActionResult result = _contatoControllerExclusaoProducer.Deletar(contato.Id);
 
