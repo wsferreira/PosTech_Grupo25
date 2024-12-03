@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postech-api-exclusao-deployment
+  labels:
+    app: postech-api-exclusao
+spec:
+  selector:
+    matchLabels:
+      app: postech-api-exclusao
+  template:
+    metadata:
+      labels:
+        app: postech-api-exclusao
+    spec:
+      containers:
+      - name: postech-api-exclusao-container
+        image: wferreirasp/postech-api-exclusao:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+ 
+
+

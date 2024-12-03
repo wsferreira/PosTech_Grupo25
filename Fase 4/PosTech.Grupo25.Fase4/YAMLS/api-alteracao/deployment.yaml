@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postech-api-alteracao-deployment
+  labels:
+    app: postech-api-alteracao
+spec:
+  selector:
+    matchLabels:
+      app: postech-api-alteracao
+  template:
+    metadata:
+      labels:
+        app: postech-api-alteracao
+    spec:
+      containers:
+      - name: postech-api-alteracao-container
+        image: wferreirasp/postech-api-alteracao:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+ 
+
+
