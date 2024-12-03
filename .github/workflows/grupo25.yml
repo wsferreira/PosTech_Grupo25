@@ -29,9 +29,9 @@ jobs:
               working-directory: ${{matrix.solution-path}}
               run: dotnet build
 
-#            - name: Testes Unitário/Integração
-#              working-directory: ${{matrix.solution-path}}
-#              run: dotnet test
+            - name: Testes Unitário/Integração
+              working-directory: ${{matrix.solution-path}}
+              run: dotnet test
 
             - name: Login no Docker Hub
               run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
